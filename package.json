@@ -1,0 +1,43 @@
+{
+  "name": "grunt-file-tags",
+  "description": "Dynamically inserts script/link/whatever tags for files on disk.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/macd2point0/grunt-file-tags",
+  "author": {
+    "name": "Daniel MacDonald",
+    "email": "dan@macd2point0.com",
+    "url": "www.macd2point0.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/macd2point0/grunt-file-tags.git"
+  },
+  "bugs": {
+    "url": "https://github.com/macd2point0/grunt-file-tags/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/macd2point0/grunt-file-tags/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-nodeunit": "^0.3.3"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}

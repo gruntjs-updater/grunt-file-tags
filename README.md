@@ -1,2 +1,139 @@
 # grunt-file-tags
-Dynamically inserts script/link/whatever tags for files on disk.
+
+> Dynamically inserts script/link/whatever HTML tags for files on disk.
+
+## Getting Started
+This plugin requires Grunt `~0.4.5`
+
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+
+```shell
+npm install grunt-file-tags --save-dev
+```
+
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
+grunt.loadNpmTasks('grunt-file-tags');
+```
+
+## The "file_tags" task
+
+### Overview
+In your project's Gruntfile, add a section named `file_tags` to the data object passed into `grunt.initConfig()`.
+
+	grunt.initConfig({
+		file_tags: {
+            scripts: {
+                options: {
+                    tagTemplate: '<script src="{{ path }}"></script>',
+                    openTag: '<!-- start script tags -->',
+                    closeTag: '<!-- end script tags -->'
+                },
+                src: [
+                    'source/**/*.js'
+                ],
+                dest: 'build/file-tags.html'
+            },
+            styles: {
+                options: {
+                    tagTemplate: '<link rel="stylesheet" href="{{ path }}"/>',
+                    openTag: '<!-- start style tags -->',
+                    closeTag: '<!-- end style tags -->'
+                },
+                src: [
+                    'source/**/*.css'
+                ],
+                dest: 'build/file-tags.html'
+            }
+        }
+	});
+
+### Options
+
+#### options.tagTemplate
+
+Type: `String`
+
+Default value: `<script src="{{ path }}"></script>`
+Example value (stylesheet): `<link rel="stylesheet" href="{{ path }}"/>`
+
+A matched file will compile the `options.tagTemplate` template with the file path.
+
+#### options.openTag
+Type: `String`
+
+Default value: `<!-- start file tags -->`
+
+Specify where in the destination file to start adding script/link/whatever tags.
+
+#### options.closeTag
+Type: `String`
+
+Default value: `<!-- end file tags -->`
+
+Specify where in the destination file to stop script/link/whatever tags.
+
+### Usage Examples
+
+#### Default Options
+
+The following is the default configuration. `tags` will generate script and link tags for all matching `src` files and using the default `scriptTemplate` and `linkTemplate` defined above. it will then add these tags to `site/index.html` between the default `openTag` and `closeTag`.
+
+	grunt.initConfig({
+		file_tags: {
+		    build: {
+		        src: [
+		            'site/js/**/*.js',
+		            '!site/js/vendor/**/*.js'
+		        ],
+		        dest: 'site/index.html'
+		    }
+		}
+	});
+	grunt.registerTask('default', ['file_tags:build']);
+
+#### Custom Options
+
+You can override all default options. In the following multi-task, we have two tasks, one for compiling scripts `scripts`, and another for compiling link tags, `styles`.
+
+`scripts` and `styles` both override `tagTemplate`, letting your define you own template with extra attributes. It also override `openTag` and `closeTag`, specifying that they are for scripts.
+
+`buildLinks` overrides `linkTemplate` to add a `media` attribute to it's link tags. Like `buildScripts`, it overrides `openTag` and `closeTag` to specify it's auto-generated css.
+
+	grunt.initConfig({
+		file_tags: {
+            scripts: {
+                options: {
+                    tagTemplate: '<script src="{{ path }}" type="text/javascript"></script>',
+                    openTag: '<!-- start custom script tags -->',
+                    closeTag: '<!-- end custom script tags -->'
+                },
+                src: [
+                    'source/**/*.js'
+                ],
+                dest: 'build/index.html'
+            },
+            styles: {
+                options: {
+                    tagTemplate: '<link rel="stylesheet" href="{{ path }}" type="text/css"/>',
+                    openTag: '<!-- start custom style tags -->',
+                    closeTag: '<!-- end custom style tags -->'
+                },
+                src: [
+                    'source/**/*.css'
+                ],
+                dest: 'build/index.html'
+            }
+        }
+	});
+	grunt.registerTask('default', ['file_tags:scripts', 'file_tags:styles']);
+
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+## Credits
+This project is basically a refactor of the excellent work done by Andrew Mead (@andrewjmead on npm) with his grunt-script-link-tags plugin.
+
+## Release History
+_(Nothing yet)_
