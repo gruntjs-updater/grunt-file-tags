@@ -34,17 +34,6 @@ In your project's Gruntfile, add a section named `file_tags` to the data object 
                     'source/**/*.js'
                 ],
                 dest: 'build/file-tags.html'
-            },
-            styles: {
-                options: {
-                    tagTemplate: '<link rel="stylesheet" href="{{ path }}"/>',
-                    openTag: '<!-- start style tags -->',
-                    closeTag: '<!-- end style tags -->'
-                },
-                src: [
-                    'source/**/*.css'
-                ],
-                dest: 'build/file-tags.html'
             }
         }
 	});
@@ -78,7 +67,7 @@ Specify where in the destination file to stop script/link/whatever tags.
 
 #### Default Options
 
-The following is the default configuration. `tags` will generate script and link tags for all matching `src` files and using the default `scriptTemplate` and `linkTemplate` defined above. it will then add these tags to `site/index.html` between the default `openTag` and `closeTag`.
+The following is the default configuration. `tags` will generate script tags for all matching `src` files and using the default `scriptTemplate` and `linkTemplate` defined above. it will then add these tags to `site/index.html` between the default `openTag` and `closeTag`.
 
 	grunt.initConfig({
 		file_tags: {
@@ -124,7 +113,29 @@ You can override all default options. In the following multi-task, we have two t
                     'source/**/*.css'
                 ],
                 dest: 'build/index.html'
-            }
+            },
+            images: {
+                options: {
+                    tagTemplate: '<img src="{{ path }}"/>',
+                    openTag: '<!-- start custom image tags -->',
+                    closeTag: '<!-- end custom image tags -->'
+                },
+                src: [
+                    'source/img/folder/*.jpg'
+                ],
+                dest: 'build/index.html'
+            },
+            less: {
+                options: {
+                    tagTemplate: '@import "{{ path }}";',
+                    openTag: '/* start style tags */',
+                    closeTag: '/* end style tags */'
+                },
+                src: [
+                    'js/**/*.less'
+                ],
+                dest: 'style/app.less'
+            },
         }
 	});
 	grunt.registerTask('default', ['file_tags:scripts', 'file_tags:styles']);
