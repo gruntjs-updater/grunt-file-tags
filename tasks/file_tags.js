@@ -86,17 +86,18 @@ module.exports = function (grunt) {
             this.options.indent = matches[1].replace(this.options.replaceNewLines, '');
         }
 
-        this.validateTemplateTags(destFile, fileContents);
+        if (this.validateTemplateTags(destFile, fileContents)) {
 
-        srcFiles.forEach(function (srcFile) {
-            // calculate the src files path relative to destination path
-            var relativePath = normalizePaths(path.relative(filePath, srcFile));
-            tagsText += that.options.indent + that.generateTag(relativePath);
-        });
+            srcFiles.forEach(function (srcFile) {
+                // calculate the src files path relative to destination path
+                var relativePath = normalizePaths(path.relative(filePath, srcFile));
+                tagsText += that.options.indent + that.generateTag(relativePath);
+            });
 
-        var res = this.addTags(fileContents, tagsText);
+            var res = this.addTags(fileContents, tagsText);
 
-        grunt.file.write(destFile, res);
+            grunt.file.write(destFile, res);
+        }
     };
 
     /**
@@ -110,7 +111,12 @@ module.exports = function (grunt) {
 
         // verify template tags exist and in logic order
         if (closeTagLocation < openTagLocation || openTagLocation === -1 || closeTagLocation === -1) {
-            grunt.fail.fatal('invalid template tags in ' + fileName);
+            grunt.log.warn('invalid or missing template tags in '['red'] + fileName['red']);
+
+            return false;
+        }
+        else {
+            return true;
         }
     };
 
@@ -152,8 +158,6 @@ module.exports = function (grunt) {
         // Iterate over all specified file groups.
         this.files.forEach(function (f) {
             tags.processFile(f.dest, f.src);
-            // Print a success message.
-            grunt.log.writeln('Tag for file "' + f.dest + '" created.');
         });
     });
 
