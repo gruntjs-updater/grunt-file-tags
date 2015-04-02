@@ -45,6 +45,7 @@ In your project's Gruntfile, add a section named `file_tags` to the data object 
 Type: `String`
 
 Default value: `<script src="{{ path }}"></script>`
+
 Example value (stylesheet): `<link rel="stylesheet" href="{{ path }}"/>`
 
 A matched file will compile the `options.tagTemplate` template with the file path.
@@ -67,7 +68,7 @@ Specify where in the destination file to stop script/link/whatever tags.
 
 #### Default Options
 
-The following is the default configuration. `tags` will generate script tags for all matching `src` files and using the default `scriptTemplate` and `linkTemplate` defined above. it will then add these tags to `site/index.html` between the default `openTag` and `closeTag`.
+The following is the default configuration. `tags` will generate script tags for all matching `src` files and using the default `tagTemplate` defined above. It will then add these tags to `site/index.html` between the default `<!-- start file tags -->` and `<!-- end file tags -->`.
 
 	grunt.initConfig({
 		file_tags: {
@@ -84,11 +85,9 @@ The following is the default configuration. `tags` will generate script tags for
 
 #### Custom Options
 
-You can override all default options. In the following multi-task, we have two tasks, one for compiling scripts `scripts`, and another for compiling link tags, `styles`.
+You can override all default options. In the following multi-task, we have four tasks, one for compiling scripts `scripts`, one for compiling link tags, `styles`, one for compiling image tags, `images`, one for compiling LESS imports, `less`.
 
-`scripts` and `styles` both override `tagTemplate`, letting your define you own template with extra attributes. It also override `openTag` and `closeTag`, specifying that they are for scripts.
-
-`buildLinks` overrides `linkTemplate` to add a `media` attribute to it's link tags. Like `buildScripts`, it overrides `openTag` and `closeTag` to specify it's auto-generated css.
+All tasks override the default `tagTemplate`, letting your define you own template with extra attributes. It also overrides `openTag` and `closeTag`, specifying that they are for the associated files.
 
 	grunt.initConfig({
 		file_tags: {
