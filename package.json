@@ -1,7 +1,7 @@
 {
   "name": "grunt-file-tags",
   "description": "Dynamically inserts script/link/whatever tags for files on disk.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/macd2point0/grunt-file-tags",
   "author": {
     "name": "Daniel MacDonald",
