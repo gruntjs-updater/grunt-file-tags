@@ -10,7 +10,6 @@
 
 module.exports = function (grunt) {
 
-    // Project configuration.
     grunt.initConfig({
         jshint: {
             all: [
@@ -23,12 +22,10 @@ module.exports = function (grunt) {
             }
         },
 
-        // Before generating any new files, remove any previously-created files.
         clean: {
             src: ['test/tmp/']
         },
 
-        // copy files for test
         copy: {
             test: {
                 expand: true,
@@ -38,7 +35,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // Configuration to be run (and then tested).
         file_tags: {
             options: {
                 //
@@ -67,24 +63,19 @@ module.exports = function (grunt) {
             }
         },
 
-        // Unit tests.
         nodeunit: {
             tests: ['test/*.test.js']
         }
 
     });
 
-    // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
 
-    // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-    // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-    // plugin's task(s), then test the result.
     grunt.registerTask('test', [
         'clean',
         'copy:test',
@@ -94,7 +85,6 @@ module.exports = function (grunt) {
         'clean'
     ]);
 
-    // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'test']);
 
 };

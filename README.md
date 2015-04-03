@@ -1,6 +1,6 @@
 # grunt-file-tags
 
-> Dynamically inserts script/link/whatever HTML tags for files on disk.
+> Dynamically includes source tags for script/link/whatever files on disk.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -133,11 +133,13 @@ All tasks override the default `tagTemplate`, letting your define you own templa
                 src: [
                     'js/**/*.less'
                 ],
-                dest: 'style/app.less'
+                dest: 'build/style/app.less'
             },
         }
 	});
 	grunt.registerTask('default', ['file_tags:scripts', 'file_tags:styles']);
+
+This plugin will scan through the `src` files, and insert all matching files into the `dest` file between the `openTag` and `closeTag`.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
@@ -146,4 +148,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 This project is basically a refactor of the excellent work done by Andrew Mead (@andrewjmead on npm) with his grunt-script-link-tags plugin.
 
 ## Release History
-_(Nothing yet)_
+2015-04-03  v0.1.4  Updated README, performed code cleanup.
+2015-04-02  v0.1.3  Warn instead of fail on missing start/close tags
+2015-04-02  v0.1.2  Updated README
+2015-03-13  v0.1.1  Initial release
