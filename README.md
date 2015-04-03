@@ -148,7 +148,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 This project is basically a refactor of the excellent work done by Andrew Mead (@andrewjmead on npm) with his grunt-script-link-tags plugin.
 
 ## Release History
-2015-04-03  v0.1.4  Updated README, performed code cleanup.
-2015-04-02  v0.1.3  Warn instead of fail on missing start/close tags
-2015-04-02  v0.1.2  Updated README
-2015-03-13  v0.1.1  Initial release
+2015-04-03      v0.1.4      Updated README, performed code cleanup
+
+2015-04-02      v0.1.3      Warn instead of fail on missing start/close tags
+
+2015-04-02      v0.1.2      Updated README
+
+2015-03-13      v0.1.1      Initial release
